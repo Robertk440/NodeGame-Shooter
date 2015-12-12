@@ -1,10 +1,10 @@
 /*
-  
+
   NodeGame: Shooter
   Copyright (c) 2010 Ivo Wetzel.
-  
+
   All rights reserved.
-  
+
   NodeGame: Shooter is free software: you can redistribute it and/or
   modify it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -17,7 +17,7 @@
 
   You should have received a copy of the GNU General Public License along with
   NodeGame: Shooter. If not, see <http://www.gnu.org/licenses/>.
-  
+
 */
 
 
@@ -54,7 +54,7 @@ Shooter.tutorialFadeOut = function() {
             $('tutorial').style.opacity = opacity;
             if (opacity === 0) {
                 hide('tutorialOverlay');
-            
+
             } else {
                 that.tutorialFadeTimer = window.setTimeout(fade, 75);
             }
@@ -93,7 +93,7 @@ Shooter.achievementFadeOut = function(callback) {
                 if (callback) {
                     callback();
                 }
-            
+
             } else {
                 that.achievementFadeTimer = window.setTimeout(fade, 50);
             }
@@ -108,31 +108,31 @@ Shooter.showAchievement = function(player, title, description, priority) {
     var overlay = $('achievementOverlay');
     if (overlay.style.display !== 'block') {
         this.achievementPriority = priority;
-    
+
         if (this.playing && this.player) {
             if (this.player.y > this.height / 2) {
                 overlay.style.paddingTop = '80px';
-            
+
             } else {
                 overlay.style.paddingTop = (this.height - 100) + 'px';
             }
-        
+
         } else {
             overlay.style.paddingTop = '80px';
         }
-        
+
         $('achievement').innerHTML = '<span style="color: '
                                      + this.playerColor(player) +'">'
                                      + '- ' + title + ' -'
                                      + '</span><br/>'
                                      + description;
-        
+
         this.achievementFadeIn();
         this.achievementTimer = window.setTimeout(function() {
             that.achievementPriority = 0;
             that.achievementFadeOut();
         }, 3500);
-    
+
     } else if (priority >= this.achievementPriority) {
         window.clearTimeout(this.achievementTimer);
         this.achievementFadeOut(function() {
@@ -158,7 +158,7 @@ Shooter.watch = function() {
     show('loginOverlay')
     hide('loginBox');
     show('offlineBox');
-    this.$.playRecording(RECORD);
+    // this.$.playRecording(RECORD);
     this.checkServer(HOST, PORT);
 };
 
@@ -179,14 +179,14 @@ Shooter.getItem = function(id, def) {
         var value = localStorage.getItem(id);
         if (value === 'false') {
             return false;
-        
+
         } else if (value === 'true') {
             return true;
-        
+
         } else {
             return def;
         }
-        
+
     } catch (e) {
         return def;
     }
@@ -195,7 +195,7 @@ Shooter.getItem = function(id, def) {
 Shooter.getItemInt = function(id) {
     try {
         return parseInt(localStorage.getItem('color') || 0);
-        
+
     } catch (e) {
         return 0;
     }
@@ -204,7 +204,7 @@ Shooter.getItemInt = function(id) {
 Shooter.setItem = function(id, value) {
     try {
         localStorage.setItem(id, value);
-    
+
     } catch(e) {
     }
 }
@@ -255,7 +255,7 @@ Shooter.playSound = function(snd) {
 
 Shooter.timeScale = function(time, scale) {
     var diff = this.getTime() - time;
-    return diff < scale ? d = 1 / scale * diff : 1;         
+    return diff < scale ? d = 1 / scale * diff : 1;
 };
 
 Shooter.wrapAngle = function(r) {
@@ -271,14 +271,14 @@ Shooter.wrapAngle = function(r) {
 Shooter.wrapPosition = function(obj) {
     if (obj.x < -16) {
         obj.x += this.width + 32;
-    
+
     } else if (obj.x > this.width + 16) {
         obj.x -= this.width + 32;
     }
-    
+
     if (obj.y < -16) {
         obj.y += this.height + 32;
-    
+
     } else if (obj.y > this.height + 16) {
         obj.y -= this.height + 32;
     }

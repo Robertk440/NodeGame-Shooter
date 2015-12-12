@@ -1,10 +1,10 @@
 /*
-  
+
   NodeGame: Shooter
   Copyright (c) 2010 Ivo Wetzel.
-  
+
   All rights reserved.
-  
+
   NodeGame: Shooter is free software: you can redistribute it and/or
   modify it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -17,7 +17,7 @@
 
   You should have received a copy of the GNU General Public License along with
   NodeGame: Shooter. If not, see <http://www.gnu.org/licenses/>.
-  
+
 */
 
 
@@ -28,15 +28,15 @@ Shooter.renderRound = function() {
     if (this.watching && !this.infoLeftText) {
         $('gameInfoLeft').innerHTML = this.infoLeftText = 'No Video, just &lt;canvas&gt;!';
     }
-        
+
     if (!this.roundGO) {
         var text = 'Next in ' + this.renderTime() + ' | Round #'
                     + this.roundID + ' finished';
-        
+
         if (text !== this.infoRightText) {
             $('gameInfoRight').innerHTML = this.infoRightText = text;
         }
-        
+
         // Scores
         this.font(15);
         var ypos = 60;
@@ -46,7 +46,7 @@ Shooter.renderRound = function() {
         this.text(xpos + 135, ypos, 'Kills', 'right', 'top');
         this.text(xpos + 195, ypos, 'Self', 'right', 'top');
         this.text(xpos + 260, ypos, 'Hit', 'right', 'top');
-        
+
         ypos += 22;
         for(var i = 0; i < this.roundStats.length; i++) {
             var p = this.roundStats[i];
@@ -59,13 +59,13 @@ Shooter.renderRound = function() {
             ypos += 18;
         }
         this.font(12);
-    
+
     } else {
-        var text = this.renderTime() + ' left | Round #' + this.roundID;
-        if (text !== this.infoRightText) {
-            $('gameInfoRight').innerHTML = this.infoRightText = text;
-            $('gameInfoRight').title = 'Ping ' + this.$.ping + 'ms';
-        }
+        // var text = this.renderTime() + ' left | Round #' + this.roundID;
+        // if (text !== this.infoRightText) {
+        //     $('gameInfoRight').innerHTML = this.infoRightText = text;
+        //     $('gameInfoRight').title = 'Ping ' + this.$.ping + 'ms';
+        // }
     }
 };
 
@@ -83,7 +83,7 @@ Shooter.renderTime = function() {
 Shooter.renderParticles = function() {
     for(var i = 0, l = this.particles.length; i < l; i++) {
         var p = this.particles[i];
-        
+
         // Normal particles
         if (!p.size) {
             p.x += Math.sin(p.r) * p.speed;
@@ -91,26 +91,26 @@ Shooter.renderParticles = function() {
             if (!p.nowrap) {
                 if (p.x < -16) {
                     p.x += this.width + 32;
-                
+
                 } else if (p.x > this.width + 16) {
                     p.x -= this.width + 32;
                 }
-                
+
                 if (p.y < -16) {
                     p.y += this.height + 32;
-                
+
                 } else if (p.y > this.height + 16) {
                     p.y -= this.height + 32;
                 }
             }
         }
-        
+
         // Kill
         if (this.getTime() > p.time) {
             this.particles.splice(i, 1);
             l--;
             i--;
-        
+
         } else {
             this.fill(p.col || '#ffffff');
             var scale = this.timeScale(p.time, p.d);
@@ -118,37 +118,37 @@ Shooter.renderParticles = function() {
                 var a = Math.round((0 - scale) * p.a * 100) / 100;
                 this.alpha(Math.min(a * 2, 1.0));
                 this.bg.fillRect(p.x - 2, p.y - 2, 4, 4);
-            
+
             } else {
                 var a = Math.round(((0 - scale) * 0.5) * 100) / 100;
                 this.alpha(Math.min(a * 1.25, 1.0));
                 this.fillCircle(p.x, p.y, p.size, p.col || '#ffffff');
-                
+
                 // Overlap
                 if (!p.nowrap) {
                     var x = p.x;
                     var y = p.y;
                     if (p.x - p.size < -16) {
                         x = p.x + 32 + this.width;
-                    
+
                     } else if (p.x + p.size > this.width + 16) {
                         x = p.x - 32 - this.width;
                     }
                     if (x !== p.x) {
                         this.fillCircle(x, p.y, p.size, p.col || '#ffffff');
                     }
-                    
+
                     if (p.y - p.size < -16) {
                         y = p.y + 32 + this.height;
-                    
+
                     } else if (p.y + p.size > this.height + 16) {
                         y = p.y - 32 - this.height;
                     }
-                    
+
                     if (y !== p.y) {
                         this.fillCircle(p.x, y, p.size, p.col || '#ffffff');
                     }
-                    
+
                     if (y !== p.y && x !== p.x) {
                         this.fillCircle(x, y, p.size, p.col || '#ffffff');
                     }
@@ -212,7 +212,7 @@ Shooter.fxRing = function(obj) {
         var oy = y + Math.cos(r) * obj.r;
         this.fxPar({'x': ox, 'y': oy, 'r': r + e / 2, 's': obj.s * 0.5 * e,
                     'd': obj.d, 'c': obj.c, 'a': obj.a});
-        
+
         this.fxPar({'x': ox, 'y': oy, 'r': r - e, 's': obj.s * e,
                     'd': obj.d * 2, 'c': obj.c, 'a': obj.a});
     }
@@ -221,6 +221,7 @@ Shooter.fxRing = function(obj) {
 
 // Drawing ---------------------------------------------------------------------
 Shooter.initCanvas = function() {
+    // CHECKED
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     this.bg = this.canvas.getContext('2d');
@@ -229,7 +230,7 @@ Shooter.initCanvas = function() {
 
 Shooter.font = function(size) {
     this.bg.font = 'bold ' + size+ 'px'
-                   + ' "Tahoma", "DejaVu Sans Mono", "Bitstream Vera Sans Mono"';
+                   + ' "HelveticaNeue", "Arial", "sans-serif"';
 };
 
 Shooter.strokeCircle = function(x, y, size, line, color) {
@@ -267,7 +268,7 @@ Shooter.alpha = function(value) {
 Shooter.text = function(x, y, text, align, baseline) {
     this.bg.textAlign = align;
     this.bg.textBaseline = baseline;
-    this.bg.fillText(text, x, y);   
+    this.bg.fillText(text, x, y);
 };
 
 Shooter.fill = function(color) {
@@ -304,7 +305,7 @@ Shooter.strokePolygon = function(col, line, points, scale) {
     if (scale !== undefined && scale !== 1) {
         this.bg.scale(scale, scale);
     }
-    
+
     this.bg.beginPath();
     this.bg.moveTo(points[0][0], points[0][1]);
     for(var i = 1; i < points.length; i++) {
@@ -320,7 +321,7 @@ Shooter.fillPolygon = function(col, line, points, scale) {
     if (scale !== undefined && scale !== 1) {
         this.bg.scale(scale, scale);
     }
-    
+
     this.bg.beginPath();
     this.bg.moveTo(points[0][0], points[0][1]);
     for(var i = 1; i < points.length; i++) {

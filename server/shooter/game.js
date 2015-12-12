@@ -27,8 +27,8 @@ var Game = Shooter.Game();
 Game.onInit = function() {
 
     // Size
-    this.width = 480;
-    this.height = 480;
+    this.width = 1680;//etc.ww;
+    this.height = 1050;//etc.wh;
     this.fieldSize = this.createField('s', [this.width, this.height]);
 
     this.fullWidth = this.width + 32;
@@ -37,8 +37,8 @@ Game.onInit = function() {
     this.halfHeight = this.height / 2;
 
     // Rounds
-    this.roundGame = 180000;
-    this.roundWait = 15000;
+    this.roundGame = 3.6e+6;
+    this.roundWait = 5000;
 
     this.roundID = 0;
     this.roundStart = 0;
@@ -52,7 +52,7 @@ Game.onInit = function() {
     this.fieldRoundStats = this.createField('rs', []);
 
     // Players
-    this.maxPlayers = 5;
+    this.maxPlayers = 20;
     this.playerCount = 0;
     this.playerColors = [-1, -1, -1, -1, -1, -1, -1];
 
@@ -87,7 +87,7 @@ Game.onInit = function() {
     this.powerUpTimes = [1.8, 1.25, 1.12, 1.0, 1, 0.9, 0.8];
 
     // Asteroids
-    this.maxAsteroids = [9, 8, 7, 7, 6, 6, 5];
+    this.maxAsteroids = [19, 18, 17, 17, 16, 16, 15];
 
     // Start Game
     this.startRound();

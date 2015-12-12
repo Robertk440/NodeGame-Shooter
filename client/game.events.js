@@ -85,9 +85,9 @@ Shooter.onCreate = function(flash) {
         that.keys = {};
     };
 
-    $('login').onkeypress = function(e) {
-        that.onLogin(e);
-    };
+    // $('login').onkeypress = function(e) {
+    //     that.onLogin(e);
+    // };
 
     if (flash) {
         show('warning');
@@ -111,8 +111,11 @@ Shooter.onUpdate = function(data, init) {
 
     // Fields
     if (data.s !== undefined) {
-        this.width = data.s[0];
-        this.height = data.s[1];
+        // this.width = data.s[0];
+        // this.height = data.s[1];
+
+        this.width = window.innerWidth;
+        this.height = window.innerHeight;
     }
     if (data.m !== undefined) {
         this.maxPlayers = data.m;
@@ -137,11 +140,11 @@ Shooter.onUpdate = function(data, init) {
             show('loginBox');
             $('login').focus();
         }
-        show('sub');
+        //show('sub');
         show(this.canvas);
-        $('gameInfo').style.width = this.width + 'px';
+        $('gameInfo').style.width = window.innerWidth + 'px';
         $('gameInfoRight').style.width = 260 + 'px';
-        $('gameInfoLeft').style.width = (this.width - 16 - 260)  + 'px';
+        $('gameInfoLeft').style.width = (window.innerWidth - 16 - 260)  + 'px';
 
     } else {
         // Tutorial
@@ -208,6 +211,7 @@ Shooter.onInput = function() {
 };
 
 Shooter.onDraw = function() {
+    // checked
     this.fill('#000000');
     this.bg.globalCompositeOperation = 'source-over';
     this.bg.fillRect(0, 0, this.width, this.height);
@@ -248,8 +252,8 @@ Shooter.onSound = function(data) {
         this.sound.enabled = !this.sound.enabled;
     }
     this.setItem('sound', this.sound.enabled);
-    $('sound').innerHTML = (this.sound.enabled ? 'DEACTIVATE' : 'ACTIVATE')
-                                                  + ' SOUND';
+    // $('sound').innerHTML = (this.sound.enabled ? 'DEACTIVATE' : 'ACTIVATE')
+    //                                               + ' SOUND';
 };
 
 Shooter.onTutorial = function(data) {
@@ -269,12 +273,12 @@ Shooter.onTutorial = function(data) {
     }
 
     this.setItem('tutorial', this.tutorialEnabled);
-    $('tut').innerHTML = (this.tutorialEnabled ? 'DISABLE' : 'RE-ENABLE')
-                                                  + ' TUTORIAL';
+    // $('tut').innerHTML = (this.tutorialEnabled ? 'DISABLE' : 'RE-ENABLE')
+    //                                               + ' TUTORIAL';
 
-    if (!this.tutorialEnabled && $('tutorial').style.display !== 'none') {
-        this.tutorialFadeOut();
-    }
+    // if (!this.tutorialEnabled && $('tutorial').style.display !== 'none') {
+    //     this.tutorialFadeOut();
+    // }
 };
 
 Shooter.onLogin = function(e) {
