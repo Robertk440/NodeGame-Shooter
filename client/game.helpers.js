@@ -156,6 +156,7 @@ Shooter.watch = function() {
     this.watching = true;
     this.reset();
     show('loginOverlay')
+    hide('gameController')
     hide('loginBox');
     show('offlineBox');
     // this.$.playRecording(RECORD);

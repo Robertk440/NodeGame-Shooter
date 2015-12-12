@@ -43,9 +43,13 @@
 
 *, *:before, *:after { box-sizing: inherit; }
 
-html { box-sizing: border-box; }
+html {
+    height: 100%;
+    box-sizing: border-box;
+}
 
 body {
+    height: 100%;
     margin: 0;
     padding: 0;
     background-color: #202020;
@@ -78,12 +82,16 @@ a:hover {
     text-decoration: underline;
 }
 
-.fork {
-    opacity: 0.15;
+.clearfix:before,
+.clearfix:after {
+    content: " ";
+    /* 1 */
+    display: table;
+    /* 2 */
 }
 
-.fork:hover {
-    opacity: 1;
+.clearfix:after {
+    clear: both;
 }
 
 /* Error */
@@ -309,21 +317,43 @@ input[type="button"]:active {
     font-size: 21px;
 }
 
-#gameController {
+#listener {
     display: none;
-    background: #fff;
-    height: 100%;
 }
 
-#gameController .commands .button {
-    background: #f44336;
+#gameController {
+    background: #cdcdcd;
+    display: none;
+    height: 100%;
+    text-align: center;
+}
+
+#gameController .button {
+    background: #cb0000;
     border-radius: 50%;
     border: 0;
     color: #fff;
-    font-size: 20px;
+    font-size: 50px;
     height: 100px;
     font-weight: bold;
     width: 100px;
+    position: relative;
+}
+
+#gameController .button.horizontal {
+    background: #282828;
+    border-radius: 0;
+}
+
+#gameController .button.horizontal svg {
+    bottom: 0;
+    display: block;
+    left: 0;
+    heigth: 88px;
+    margin: auto;
+    right: 0;
+    top: 0;
+    width: 88px;
 }
 
 @media screen and (max-width: 1023px) {
@@ -336,6 +366,68 @@ input[type="button"]:active {
     }
 
     #gameController {
+        /*display: none;*/
+    }
+}
+
+/* Portrait */
+@media only screen
+  and (min-device-width: 320px)
+  and (orientation: portrait) {
+    #gameController .wrap {
+        height: 100%;
+    }
+
+    #gameController .button {
+        -webkit-transform: rotate(90deg);
+           -moz-transform: rotate(90deg);
+             -o-transform: rotate(90deg);
+            -ms-transform: rotate(90deg);
+                transform: rotate(90deg);
+
         display: block;
+        margin: 10px auto;
+    }
+
+    #gameController .d-pad {
+        left: 0;
+        position: absolute;
+        right: 0;
+        top: 20px;
+    }
+
+    #gameController .commands {
+        bottom: 20px;
+        left: 0;
+        position: absolute;
+        right: 0;
+    }
+}
+
+/* Landscape */
+@media only screen
+  and (min-device-width: 320px)
+  and (orientation: landscape) {
+    #gameController .wrap {
+        bottom: 0;
+        height: 102px;
+        margin: auto;
+        position: absolute;
+        top: 0;
+        width: 100%;
+    }
+
+    #gameController .button {
+        margin: 0 10px;
+    }
+
+    #gameController .d-pad {
+        float: left;
+        margin: 0 0 0 20px;
+    }
+
+    #gameController .commands {
+        float: right;
+        margin: 0 20px 0 0;
     }
 }

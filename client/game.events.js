@@ -78,7 +78,6 @@ Shooter.onCreate = function(flash) {
                 return false;
             }
         }
-
     };
 
     window.onblur = function(e) {
@@ -138,6 +137,7 @@ Shooter.onUpdate = function(data, init) {
         this.initCanvas();
         if (!this.watching) {
             show('loginBox');
+            hide('gameController');
             $('login').focus();
         }
         //show('sub');
@@ -167,7 +167,9 @@ Shooter.onMessage = function(msg) {
         this.kicked = false;
         this.playing = true;
         hide('loginOverlay');
+        show('gameController');
     }
+
     if (msg.rt !== undefined) {
         this.roundStart = this.getTime();
         this.roundTime = msg.rt;

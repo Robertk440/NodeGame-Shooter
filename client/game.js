@@ -154,6 +154,7 @@ Shooter.checkPlayers = function(data) {
 
         } else {
             hide(login);
+            hide('gameController');
         }
     }
 };
@@ -221,7 +222,16 @@ function initGame() {
 
 function show(id) {
     console.log(id)
-    $(id).style.display = 'block';
+    console.log(window.innerWidth)
+
+    console.log(id == 'loginBox')
+    console.log(window.innerWidth < 1024)
+
+    if (id == 'loginBox' && window.innerWidth > 1024) {
+        $(id).style.display = 'none';
+    } else {
+        $(id).style.display = 'block';
+    }
 }
 
 function hide(id) {
