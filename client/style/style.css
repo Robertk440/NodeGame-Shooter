@@ -50,7 +50,9 @@ html {
 
 body {
     height: 100%;
-    margin: 0;
+    max-width: 1024px;
+    width: 100%;
+    margin: auto;
     padding: 0;
     background-color: #202020;
     font-family: "HelveticaNeue", Arial, sans-serif;
@@ -63,6 +65,12 @@ body {
 canvas {
     margin: auto;
     display: none;
+
+    height: 100%;
+    width: 100%;
+
+    max-height: 768px;
+    max-width: 1024px;
 }
 
 noscript {
@@ -322,13 +330,26 @@ input[type="button"]:active {
 }
 
 #gameController {
-    background: #cdcdcd;
+    background: #cb0000; //#cdcdcd;
     display: none;
     height: 100%;
     text-align: center;
+    position: relative;
 }
 
-#gameController .button {
+#gameController span {
+    bottom: 0;
+    display: block;
+    height: 100px;
+    font-size: 72px;
+    left: 0;
+    margin: auto;
+    position: absolute;
+    right: 0;
+    top: 0;
+}
+
+/*#gameController .button {
     background: #cb0000;
     border-radius: 50%;
     border: 0;
@@ -338,11 +359,12 @@ input[type="button"]:active {
     font-weight: bold;
     width: 100px;
     position: relative;
-}
+}*/
 
-#gameController .button.horizontal {
+/*#gameController .button.horizontal {
     background: #282828;
     border-radius: 0;
+    height: 100px;
 }
 
 #gameController .button.horizontal svg {
@@ -354,7 +376,7 @@ input[type="button"]:active {
     right: 0;
     top: 0;
     width: 88px;
-}
+}*/
 
 @media screen and (max-width: 1023px) {
     body {
@@ -363,10 +385,6 @@ input[type="button"]:active {
 
     canvas {
         display: none !important;
-    }
-
-    #gameController {
-        /*display: none;*/
     }
 }
 
@@ -378,7 +396,7 @@ input[type="button"]:active {
         height: 100%;
     }
 
-    #gameController .button {
+    /*#gameController .button {
         -webkit-transform: rotate(90deg);
            -moz-transform: rotate(90deg);
              -o-transform: rotate(90deg);
@@ -401,7 +419,7 @@ input[type="button"]:active {
         left: 0;
         position: absolute;
         right: 0;
-    }
+    }*/
 }
 
 /* Landscape */
@@ -417,7 +435,7 @@ input[type="button"]:active {
         width: 100%;
     }
 
-    #gameController .button {
+   /* #gameController .button {
         margin: 0 10px;
     }
 
@@ -429,5 +447,5 @@ input[type="button"]:active {
     #gameController .commands {
         float: right;
         margin: 0 20px 0 0;
-    }
+    }*/
 }

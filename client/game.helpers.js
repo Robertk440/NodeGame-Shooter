@@ -33,7 +33,7 @@ Shooter.tutorialFadeIn = function() {
     var opacity = this.getOpacity('tutorial');
     function fade() {
         if (opacity < 1 && that.roundGO && that.tutorialEnabled) {
-            show('tutorialOverlay');
+            // show('tutorialOverlay');
             opacity = Math.min(opacity + 0.075, 1);
             $('tutorial').style.opacity = opacity;
             if (opacity < 1) {

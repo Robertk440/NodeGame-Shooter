@@ -185,8 +185,8 @@ Shooter.tutorials = {
 Shooter.tutorial = function(id) {
     var that = this;
     if (this.tutorialEnabled && id in Shooter.tutorials) {
-        show('tutorial');
-        show('tutorialOverlay');
+        // show('tutorial');
+        // show('tutorialOverlay');
         $('tutorial').innerHTML = Shooter.tutorials[id][0].replace(/\n/g, '<br/>');
         this.tutorialFadeIn();
 
@@ -221,13 +221,7 @@ function initGame() {
 }
 
 function show(id) {
-    console.log(id)
-    console.log(window.innerWidth)
-
-    console.log(id == 'loginBox')
-    console.log(window.innerWidth < 1024)
-
-    if (id == 'loginBox' && window.innerWidth > 1024) {
+    if (id == 'loginBox' && window.innerWidth >= 1024) {
         $(id).style.display = 'none';
     } else {
         $(id).style.display = 'block';

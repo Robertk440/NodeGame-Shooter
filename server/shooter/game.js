@@ -16,7 +16,7 @@
   GNU General Public License for more details.
 
   You should have received a copy of the GNU General Public License along with
-  NodeGame: Game. If not, see <http://www.gnu.org/licenses/>.
+  NodeGame: Game. If not10, see <http://www.gnu.org/licenses/>.
 
 */
 
@@ -27,8 +27,8 @@ var Game = Shooter.Game();
 Game.onInit = function() {
 
     // Size
-    this.width = 1680;//etc.ww;
-    this.height = 1050;//etc.wh;
+    this.width = 1024;//etc.ww;
+    this.height = 768;//etc.wh;
     this.fieldSize = this.createField('s', [this.width, this.height]);
 
     this.fullWidth = this.width + 32;

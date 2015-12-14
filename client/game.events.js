@@ -69,16 +69,50 @@ Shooter.onCreate = function(flash) {
         if (key !== 116 && !e.shiftKey && !e.altKey && !e.ctrlKey) {
             if (e.type === "keydown") {
                 that.keys[key] = 1;
-
             } else {
                 that.keys[key] = 2;
             }
+
             if (that.playing) {
                 e.preventDefault();
                 return false;
             }
         }
     };
+
+    window.ondevicemotion = function(event) {
+        accX = Math.round(event.accelerationIncludingGravity.x*10) / 10;
+        accY = Math.round(event.accelerationIncludingGravity.y*10) / 10;
+
+        movement = 10;
+
+        xA = -(accX / 10) * movement;
+        yA = -(accY / 10) * movement;
+
+        console.log(yA)
+
+        if (yA > 0) {
+            that.keys[38] = 1;
+        } else if (yA <= 0) {
+            that.keys[38] = 0;
+        }
+
+        if (xA > 0) {
+            that.keys[39] = 1;
+            that.keys[37] = 0;
+        } else if (xA <= 0) {
+            that.keys[37] = 1;
+            that.keys[39] = 0;
+        }
+    }
+
+    document.body.addEventListener('touchstart', function () {
+        that.keys[32] = 1;
+    });
+
+    document.body.addEventListener('touchend', function () {
+        that.keys[32] = 0;
+    });
 
     window.onblur = function(e) {
         that.keys = {};
