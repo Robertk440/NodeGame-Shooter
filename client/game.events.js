@@ -97,11 +97,14 @@ Shooter.onCreate = function(flash) {
             that.keys[38] = 0;
         }
 
-        if (xA > 0) {
+        if (xA > 5) {
             that.keys[39] = 1;
             that.keys[37] = 0;
-        } else if (xA <= 0) {
+        } else if (xA < -5) {
             that.keys[37] = 1;
+            that.keys[39] = 0;
+        } else {
+            that.keys[37] = 0;
             that.keys[39] = 0;
         }
     }
