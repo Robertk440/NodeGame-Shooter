@@ -89,7 +89,7 @@ Shooter.onCreate = function(flash) {
         xA = -(accX / 10) * movement;
         yA = -(accY / 10) * movement;
 
-        console.log(yA)
+        // console.log(yA)
 
         if (yA > 0) {
             that.keys[38] = 1;
@@ -147,11 +147,11 @@ Shooter.onUpdate = function(data, init) {
 
     // Fields
     if (data.s !== undefined) {
-        // this.width = data.s[0];
-        // this.height = data.s[1];
+        this.width = data.s[0];
+        this.height = data.s[1];
 
-        this.width = window.innerWidth;
-        this.height = window.innerHeight;
+        // this.width = window.innerWidth;
+        // this.height = window.innerHeight;
     }
     if (data.m !== undefined) {
         this.maxPlayers = data.m;
