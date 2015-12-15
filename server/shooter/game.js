@@ -37,7 +37,7 @@ Game.onInit = function() {
     this.halfHeight = this.height / 2;
 
     // Rounds
-    this.roundGame = 120000;
+    this.roundGame = 300000;
     this.roundWait = 30000;
 
     this.roundID = 0;
