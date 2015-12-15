@@ -27,8 +27,8 @@ var Game = Shooter.Game();
 Game.onInit = function() {
 
     // Size
-    this.width = 1024;//etc.ww;
-    this.height = 768;//etc.wh;
+    this.width = 1280;//etc.ww;
+    this.height = 800;//etc.wh;
     this.fieldSize = this.createField('s', [this.width, this.height]);
 
     this.fullWidth = this.width + 32;
@@ -37,8 +37,8 @@ Game.onInit = function() {
     this.halfHeight = this.height / 2;
 
     // Rounds
-    this.roundGame = 3.6e+6;
-    this.roundWait = 5000;
+    this.roundGame = 120000;
+    this.roundWait = 30000;
 
     this.roundID = 0;
     this.roundStart = 0;
@@ -54,7 +54,7 @@ Game.onInit = function() {
     // Players
     this.maxPlayers = 20;
     this.playerCount = 0;
-    this.playerColors = [-1, -1, -1, -1, -1, -1, -1];
+    this.playerColors = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
 
     this.fieldMaxPlayers = this.createField('m', this.maxPlayers);
     this.fieldPlayers = this.createField('p', {});

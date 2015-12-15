@@ -24,127 +24,129 @@
 // Helpers ---------------------------------------------------------------------
 //------------------------------------------------------------------------------
 Shooter.getOpacity = function(id) {
+    console.log(id)
+
     var o = $(id).style.opacity;
     return o === '' ? 0 : parseFloat(o.toString().replace(',', '.'));
 };
 
 Shooter.tutorialFadeIn = function() {
-    var that = this;
-    var opacity = this.getOpacity('tutorial');
-    function fade() {
-        if (opacity < 1 && that.roundGO && that.tutorialEnabled) {
-            // show('tutorialOverlay');
-            opacity = Math.min(opacity + 0.075, 1);
-            $('tutorial').style.opacity = opacity;
-            if (opacity < 1) {
-                that.tutorialFadeTimer = window.setTimeout(fade, 75);
-            }
-        }
-    }
-    window.clearTimeout(this.tutorialFadeTimer);
-    fade();
+    // var that = this;
+    // var opacity = this.getOpacity('tutorial');
+    // function fade() {
+    //     if (opacity < 1 && that.roundGO && that.tutorialEnabled) {
+    //         // show('tutorialOverlay');
+    //         opacity = Math.min(opacity + 0.075, 1);
+    //         // $('tutorial').style.opacity = opacity;
+    //         if (opacity < 1) {
+    //             that.tutorialFadeTimer = window.setTimeout(fade, 75);
+    //         }
+    //     }
+    // }
+    // window.clearTimeout(this.tutorialFadeTimer);
+    // fade();
 };
 
 Shooter.tutorialFadeOut = function() {
-    var that = this;
-    var opacity = this.getOpacity('tutorial');
-    function fade() {
-        if (opacity > 0) {
-            opacity = Math.max(opacity - 0.075, 0);
-            $('tutorial').style.opacity = opacity;
-            if (opacity === 0) {
-                hide('tutorialOverlay');
+    // var that = this;
+    // var opacity = this.getOpacity('tutorial');
+    // function fade() {
+    //     if (opacity > 0) {
+    //         opacity = Math.max(opacity - 0.075, 0);
+    //         // $('tutorial').style.opacity = opacity;
+    //         if (opacity === 0) {
+    //             // hide('tutorialOverlay');
 
-            } else {
-                that.tutorialFadeTimer = window.setTimeout(fade, 75);
-            }
-        }
-    }
-    window.clearTimeout(this.tutorialFadeTimer);
-    fade();
+    //         } else {
+    //             that.tutorialFadeTimer = window.setTimeout(fade, 75);
+    //         }
+    //     }
+    // }
+    // window.clearTimeout(this.tutorialFadeTimer);
+    // fade();
 };
 
 Shooter.achievementFadeIn = function() {
-    var that = this;
-    var opacity = this.getOpacity('achievement');
-    function fade() {
-        if (opacity < 1) {
-            show('achievementOverlay');
-            opacity = Math.min(opacity + 0.075, 1);
-            $('achievement').style.opacity = opacity;
-            if (opacity < 1) {
-                that.achievementFadeTimer = window.setTimeout(fade, 50);
-            }
-        }
-    }
-    window.clearTimeout(this.achievementFadeTimer);
-    fade();
+    // var that = this;
+    // var opacity = this.getOpacity('achievement');
+    // function fade() {
+    //     if (opacity < 1) {
+    //         // show('achievementOverlay');
+    //         opacity = Math.min(opacity + 0.075, 1);
+    //         // $('achievement').style.opacity = opacity;
+    //         if (opacity < 1) {
+    //             that.achievementFadeTimer = window.setTimeout(fade, 50);
+    //         }
+    //     }
+    // }
+    // window.clearTimeout(this.achievementFadeTimer);
+    // fade();
 };
 
 Shooter.achievementFadeOut = function(callback) {
-    var that = this;
-    var opacity = this.getOpacity('achievement');
-    function fade() {
-        if (opacity > 0) {
-            opacity = Math.max(opacity - 0.075, 0);
-            $('achievement').style.opacity = opacity;
-            if (opacity === 0) {
-                hide('achievementOverlay');
-                if (callback) {
-                    callback();
-                }
+    // var that = this;
+    // var opacity = this.getOpacity('achievement');
+    // function fade() {
+    //     if (opacity > 0) {
+    //         opacity = Math.max(opacity - 0.075, 0);
+    //         // $('achievement').style.opacity = opacity;
+    //         if (opacity === 0) {
+    //             // hide('achievementOverlay');
+    //             if (callback) {
+    //                 callback();
+    //             }
 
-            } else {
-                that.achievementFadeTimer = window.setTimeout(fade, 50);
-            }
-        }
-    }
-    window.clearTimeout(this.achievementFadeTimer);
-    fade();
+    //         } else {
+    //             that.achievementFadeTimer = window.setTimeout(fade, 50);
+    //         }
+    //     }
+    // }
+    // window.clearTimeout(this.achievementFadeTimer);
+    // fade();
 };
 
 Shooter.showAchievement = function(player, title, description, priority) {
-    var that = this;
-    var overlay = $('achievementOverlay');
-    if (overlay.style.display !== 'block') {
-        this.achievementPriority = priority;
+    // var that = this;
+    // var overlay = $('achievementOverlay');
+    // if (overlay.style.display !== 'block') {
+    //     this.achievementPriority = priority;
 
-        if (this.playing && this.player) {
-            if (this.player.y > this.height / 2) {
-                overlay.style.paddingTop = '80px';
+    //     if (this.playing && this.player) {
+    //         if (this.player.y > this.height / 2) {
+    //             overlay.style.paddingTop = '80px';
 
-            } else {
-                overlay.style.paddingTop = (this.height - 100) + 'px';
-            }
+    //         } else {
+    //             overlay.style.paddingTop = (this.height - 100) + 'px';
+    //         }
 
-        } else {
-            overlay.style.paddingTop = '80px';
-        }
+    //     } else {
+    //         overlay.style.paddingTop = '80px';
+    //     }
 
-        $('achievement').innerHTML = '<span style="color: '
-                                     + this.playerColor(player) +'">'
-                                     + '- ' + title + ' -'
-                                     + '</span><br/>'
-                                     + description;
+    //     $('achievement').innerHTML = '<span style="color: '
+    //                                  + this.playerColor(player) +'">'
+    //                                  + '- ' + title + ' -'
+    //                                  + '</span><br/>'
+    //                                  + description;
 
-        this.achievementFadeIn();
-        this.achievementTimer = window.setTimeout(function() {
-            that.achievementPriority = 0;
-            that.achievementFadeOut();
-        }, 3500);
+    //     this.achievementFadeIn();
+    //     this.achievementTimer = window.setTimeout(function() {
+    //         that.achievementPriority = 0;
+    //         that.achievementFadeOut();
+    //     }, 3500);
 
-    } else if (priority >= this.achievementPriority) {
-        window.clearTimeout(this.achievementTimer);
-        this.achievementFadeOut(function() {
-            that.showAchievement(player, title, description);
-        });
-    }
+    // } else if (priority >= this.achievementPriority) {
+    //     window.clearTimeout(this.achievementTimer);
+    //     this.achievementFadeOut(function() {
+    //         that.showAchievement(player, title, description);
+    //     });
+    // }
 };
 
 Shooter.achievementHide = function() {
-    window.clearTimeout(this.achievementTimer);
-    this.achievementPriority = 0;
-    this.achievementFadeOut();
+    // window.clearTimeout(this.achievementTimer);
+    // this.achievementPriority = 0;
+    // this.achievementFadeOut();
 }
 
 

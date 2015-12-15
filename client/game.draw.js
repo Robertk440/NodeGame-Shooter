@@ -30,8 +30,7 @@ Shooter.renderRound = function() {
     }
 
     if (!this.roundGO) {
-        var text = 'Next in ' + this.renderTime() + ' | Round #'
-                    + this.roundID + ' finished';
+        var text = 'Next in ' + this.renderTime();
 
         if (text !== this.infoRightText) {
             $('gameInfoRight').innerHTML = this.infoRightText = text;
@@ -58,14 +57,15 @@ Shooter.renderRound = function() {
             this.text(xpos + 260, ypos, p[5] >= 0 ? (p[5] + '%') : '--', 'right', 'top');
             ypos += 18;
         }
-        this.font(12);
+        this.font(16);
 
     } else {
         // var text = this.renderTime() + ' left | Round #' + this.roundID;
-        // if (text !== this.infoRightText) {
-        //     $('gameInfoRight').innerHTML = this.infoRightText = text;
-        //     $('gameInfoRight').title = 'Ping ' + this.$.ping + 'ms';
-        // }
+        var text = this.renderTime() + ' left';
+        if (text !== this.infoRightText) {
+            $('gameInfoRight').innerHTML = this.infoRightText = text;
+            $('gameInfoRight').title = 'Ping ' + this.$.ping + 'ms';
+        }
     }
 };
 
@@ -225,7 +225,7 @@ Shooter.initCanvas = function() {
     this.canvas.width = this.width;
     this.canvas.height = this.height;
     this.bg = this.canvas.getContext('2d');
-    this.font(12);
+    this.font(16);
 };
 
 Shooter.font = function(size) {
