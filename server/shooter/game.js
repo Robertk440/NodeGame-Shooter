@@ -27,8 +27,8 @@ var Game = Shooter.Game();
 Game.onInit = function() {
 
     // Size
-    this.width = 1280;//etc.ww;
-    this.height = 800;//etc.wh;
+    this.width = 1024;//etc.ww;
+    this.height = 768;//etc.wh;
     this.fieldSize = this.createField('s', [this.width, this.height]);
 
     this.fullWidth = this.width + 32;
