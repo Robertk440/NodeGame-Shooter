@@ -130,126 +130,14 @@
 
 
 (function () {
-    var $window = $(window),
-        $listener = $('#listener'),
-        isDownA = false,
-        isDownB = false,
-        isDownLeft = false,
-        isDownRight = false;
+    $(window).load(function() {
+        $('#login').on('keyup', function (e) {
+            console.log(e.keyCode)
+            if (e.keyCode == 13) {
+                Shooter.doLogin();
+            }
+        });
 
-    // 38 up
-    // 40 down
-    // 37 left
-    // 39 right
-    // 32 space
-
-    $(document).ready(function () {
-        console.log('foobar')
-    });
-
-    // var btnA = document.getElementById('A'),
-    //     btnB = document.getElementById('B'),
-    //     btnLeft = document.getElementById('LEFT')
-    //     btnRight = document.getElementById('RIGHT');
-
-    // // create a simple instance
-    // // by default, it only adds horizontal recognizers
-    // var _btnA = new Hammer(btnA);
-    // _btnA.on('tap press multitap touch', function(ev) {
-    //     console.log('FIRE ' + ev.type +' gesture detected.');
-    //     isDownA = true;
-    // }).on('pressup', function () {
-    //     console.log('FIRE pressup')
-    //     isDownA = false;
-    // });
-
-    // var _btnB = new Hammer(btnB);
-    // _btnB.on('tap press multitap touch', function(ev) {
-    //     console.log('THRUST ' + ev.type +' gesture detected.');
-    //     isDownB = true;
-    // }).on('pressup', function () {
-    //     console.log('THRUST pressup')
-    //     isDownB = false;
-    // });
-
-    // var _btnLeft = new Hammer(btnLeft);
-    // _btnLeft.on('tap press multitap touch', function(ev) {
-    //     console.log('LEFT ' + ev.type +' gesture detected.');
-    //     isDownLeft = true;
-    // }).on('pressup', function () {
-    //     console.log('LEFT pressup')
-    //     isDownLeft = false;
-    // });
-
-    // var _btnRight = new Hammer(btnRight);
-    // _btnRight.on('tap press multitap touch', function(ev) {
-    //     console.log('Right' + ev.type +' gesture detected.');
-    //     isDownRight = true;
-    // }).on('pressup', function () {
-    //     console.log('RIGHT pressup')
-    //     isDownRight = false;
-    // });
-
-    // // $('.button').on('taphold', function (e) {
-    // //     console.log('mousedown')
-    // //     console.log(e.currentTarget)
-
-    // //     if (e.currentTarget.id == 'LEFT') {
-    // //         console.log('LEFT');
-    // //         KeyEvent.simulate(37, 37);
-    // //     };
-
-    // //     if (e.currentTarget.id == 'RIGHT') {
-    // //         console.log('RIGHT');
-    // //         KeyEvent.simulate(39, 39);
-    // //     };
-
-    // //     if (e.currentTarget.id == 'B') {
-    // //         console.log('THRUST');
-    // //         KeyEvent.simulate(38, 38);
-    // //     };
-
-    // //     if (e.currentTarget.id == 'A') {
-    // //         console.log('FIRE');
-    // //         KeyEvent.simulate(32, 32);
-    // //     };
-    // // }).on('focus', function(e){
-    // //     console.log('focus')
-
-    // // }).on('mouseup mouseleave focus click touchend', '.button', function(e) {
-    // //     e.preventDefault();
-
-    // //     $(this).blur();
-    // //     console.log('mouseup')
-
-    // //     if (e.currentTarget.id == 'B') {
-    // //         isDownB = false;
-    // //     };
-
-    // //     if (e.currentTarget.id == 'A') {
-    // //         isDownA = false;
-    // //     };
-    // // });
-
-    // setInterval(function(){
-    //     if (isDownA) {
-    //         KeyEvent.simulate(32, 32);
-    //     }
-
-    //     if (isDownB) {
-    //         KeyEvent.simulate(38, 38);
-    //     }
-
-    //     if (isDownLeft) {
-    //         KeyEvent.simulate(37, 37);
-    //     }
-
-    //     if (isDownRight) {
-    //         KeyEvent.simulate(39, 39);
-    //     }
-    // }, 100);
-
-    $window.load(function() {
         initGame();
     });
 }());

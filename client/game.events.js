@@ -228,7 +228,10 @@ Shooter.onMessage = function(msg) {
         this.kicked = false;
         this.playing = true;
         hide('loginOverlay');
-        show('gameController');
+
+        if (window.innerWidth < 1024) {
+            show('gameController');
+        }
     }
 
     if (msg.rt !== undefined) {
@@ -354,7 +357,15 @@ Shooter.onLogin = function(e) {
 
 Shooter.doLogin = function() {
     var playerName = $('login').value;
+
+    if (playerName == 'there is no spoon') {
+        hide('loginBox');
+        return false;
+    }
+
     playerName = playerName.replace(/^\s+|\s+$/g, '').replace(/\s+/g, '_');
+
+
     if (playerName.length >= 2 && playerName.length <= 15) {
         this.send({'player': playerName, 'color': this.colorSelected});
     }

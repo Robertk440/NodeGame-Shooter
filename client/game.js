@@ -143,7 +143,6 @@ Shooter.checkPlayers = function(data) {
     for(var i in data.p) {
         count++;
     }
-
     var login = $('loginOverlay');
     if (!this.playing) {
         if (count < this.maxPlayers) {
@@ -221,11 +220,13 @@ function initGame() {
 }
 
 function show(id) {
-    if (id == 'loginBox' && window.innerWidth >= 1024) {
-        $(id).style.display = 'none';
-    } else {
-        $(id).style.display = 'block';
-    }
+    // if (id == 'loginBox' && window.innerWidth >= 1024) {
+    //     $(id).style.display = 'none';
+    // } else {
+    //     $(id).style.display = 'block';
+    // }
+
+    $(id).style.display = 'block';
 }
 
 function hide(id) {
