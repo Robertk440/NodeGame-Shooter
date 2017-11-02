@@ -80,6 +80,13 @@ Shooter.onCreate = function(flash) {
         }
     };
 
+    var _iOSDevice = !!navigator.platform.match(/iPhone|iPod|iPad/),
+        movement = 10,
+        accX = 0,
+        xA = 0,
+        accY = 0,
+        yA = 0;
+
     window.ondevicemotion = function(event) {
         accX = Math.round(event.accelerationIncludingGravity.x*10) / 10;
         accY = Math.round(event.accelerationIncludingGravity.y*10) / 10;
@@ -89,23 +96,40 @@ Shooter.onCreate = function(flash) {
         xA = -(accX / 10) * movement;
         yA = -(accY / 10) * movement;
 
-        // console.log(yA)
+        if (_iOSDevice) {
+            if (xA > 5) {
+                that.keys[37] = 1;
+                that.keys[39] = 0;
+            } else if (xA < -5) {
+                that.keys[39] = 1;
+                that.keys[37] = 0;
+            } else {
+                that.keys[37] = 0;
+                that.keys[39] = 0;
+            }
 
-        if (yA > 0) {
-            that.keys[38] = 1;
-        } else if (yA <= 0) {
-            that.keys[38] = 0;
-        }
-
-        if (xA > 5) {
-            that.keys[39] = 1;
-            that.keys[37] = 0;
-        } else if (xA < -5) {
-            that.keys[37] = 1;
-            that.keys[39] = 0;
+            if (yA < 4) {
+                that.keys[38] = 1;
+            } else {
+                that.keys[38] = 0;
+            }
         } else {
-            that.keys[37] = 0;
-            that.keys[39] = 0;
+            if (xA > 5) {
+                that.keys[39] = 1;
+                that.keys[37] = 0;
+            } else if (xA < -5) {
+                that.keys[37] = 1;
+                that.keys[39] = 0;
+            } else {
+                that.keys[37] = 0;
+                that.keys[39] = 0;
+            }
+
+            if (yA > -4) {
+                that.keys[38] = 1;
+            } else {
+                that.keys[38] = 0;
+            }
         }
     }
 
