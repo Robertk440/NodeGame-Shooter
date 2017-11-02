@@ -71,6 +71,12 @@ canvas {
 
     max-height: 768px;
     max-width: 1024px;
+
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 0;
+    bottom: 0;
 }
 
 noscript {
@@ -145,6 +151,14 @@ a:hover {
 }
 
 
+#powered {
+    bottom: 20px;
+    display: block;
+    position: absolute;
+    left: 20px;
+    width: 200px;
+}
+
 /* Login */
 #loginOverlay {
     position: absolute;
@@ -156,6 +170,7 @@ a:hover {
     height: 220px;
     width: 100%;
     display: none;
+    z-index: 10;
 }
 
 #loginBox, #offlineBox {

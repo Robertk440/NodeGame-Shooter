@@ -1,71 +1,97 @@
 <!DOCTYPE html>
 <html class="no-js" lang="en">
-    <head>
-        <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
-        <title>NodeGame: Shooter</title>
-        <link rel="stylesheet" type="text/css" href="style/style.css">
-    </head>
 
-    <body>
-        <div id="gameOverlay">
-            <div id="gameInfo">
-                <div id="gameInfoRight"></div>
-                <div id="gameInfoLeft"></div>
-            </div>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+    <title>Asteroids</title>
+    <link rel="stylesheet" type="text/css" href="style/style.css">
+</head>
+
+<body>
+    <a href="http://adelphi.digital/" target="_blank" id="powered">
+        <span>Powered by:</span>
+        <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+            viewBox="0 0 655 75" enable-background="new 0 0 655 75" xml:space="preserve">
+            <polygon fill="#FFFFFF" points="59.1,64.3 34.7,10.7 29,10.7 4.6,64.3 10.8,64.3 31.8,17.7 52.6,64.3 " />
+            <g>
+                <defs>
+                    <rect id="SVGID_1_" width="655" height="75" />
+                </defs>
+                <clipPath id="SVGID_2_">
+                    <use xlink:href="#SVGID_1_" overflow="visible" />
+                </clipPath>
+                <path clip-path="url(#SVGID_2_)" fill="#FFFFFF" d="M63.7,10.7h18.6c16.8,0,28.5,11.6,28.5,26.6v0.2c0,15.1-11.6,26.8-28.5,26.8 H63.7V10.7z M69.8,16.3v42.4h12.6c13.6,0,22.2-9.2,22.2-21.1v-0.2c0-11.9-8.7-21.2-22.2-21.2H69.8z" />
+                <polygon clip-path="url(#SVGID_2_)" fill="#FFFFFF" points="117.6,10.7 156.4,10.7 156.4,16.2 123.7,16.2 123.7,39.9 152.9,39.9 152.9,45.4 123.7,45.4 123.7,58.8 156.8,58.8 156.8,64.3 117.6,64.3 	" />
+                <polygon clip-path="url(#SVGID_2_)" fill="#FFFFFF" points="163.6,10.7 169.6,10.7 169.6,58.7 199.8,58.7 199.8,64.3 163.6,64.3 " />
+                <path clip-path="url(#SVGID_2_)" fill="#FFFFFF" d="M206.8,10.7h20.1c12.1,0,20.1,6.4,20.1,17v0.2c0,11.6-9.6,17.5-21.1,17.5h-13 v18.9h-6V10.7z M226.1,39.9c8.9,0,14.7-4.7,14.7-11.8v-0.2c0-7.7-5.7-11.6-14.4-11.6h-13.6v23.6H226.1z" />
+                <polygon clip-path="url(#SVGID_2_)" fill="#FFFFFF" points="253.8,10.7 259.8,10.7 259.8,39.8 290.8,39.8 290.8,10.7 296.8,10.7 296.8,64.3 290.8,64.3 290.8,45.4 259.8,45.4 259.8,64.3 253.8,64.3 	" />
+                <rect x="305.6" y="10.7" clip-path="url(#SVGID_2_)" fill="#FFFFFF" width="6" height="53.6" />
+                <path clip-path="url(#SVGID_2_)" fill="#FFFFFF" d="M365,10.7h18.6c16.8,0,28.5,11.6,28.5,26.6v0.2c0,15.1-11.6,26.8-28.5,26.8H365 V10.7z M371,16.3v42.4h12.6c13.6,0,22.2-9.2,22.2-21.1v-0.2c0-11.9-8.7-21.2-22.2-21.2H371z" />
+                <rect x="420.7" y="10.7" clip-path="url(#SVGID_2_)" fill="#FFFFFF" width="6" height="53.6" />
+                <path clip-path="url(#SVGID_2_)" fill="#FFFFFF" d="M484.2,39.9V57c-5,4.4-12.5,8.2-21.5,8.2c-16.8,0-27.3-12.2-27.3-27.6v-0.2 c0-14.7,10.8-27.7,26.9-27.7c9,0,14.6,2.6,20,7.1l-3.9,4.6c-4.1-3.6-8.7-6.1-16.3-6.1c-11.9,0-20.4,10-20.4,22v0.2 c0,12.8,8.2,22.3,21.2,22.3c6.1,0,11.8-2.4,15.5-5.4V39.9H484.2z" />
+                <rect x="493" y="10.7" clip-path="url(#SVGID_2_)" fill="#FFFFFF" width="6" height="53.6" />
+                <polygon clip-path="url(#SVGID_2_)" fill="#FFFFFF" points="525.8,16.3 507.8,16.3 507.8,10.7 549.9,10.7 549.9,16.3 531.9,16.3 531.9,64.3 525.8,64.3 	" />
+                <polygon clip-path="url(#SVGID_2_)" fill="#FFFFFF" points="604.4,10.7 610.4,10.7 610.4,58.7 640.6,58.7 640.6,64.3 604.4,64.3 " />
+                <path clip-path="url(#SVGID_2_)" fill="#FEDC00" d="M328.7,37.5c0-5.2,4.4-9.6,9.6-9.6c5.2,0,9.6,4.4,9.6,9.6 c0,5.2-4.4,9.6-9.6,9.6C333.1,47.1,328.7,42.7,328.7,37.5" />
+                <path clip-path="url(#SVGID_2_)" fill="#FFFFFF" d="M644.5,10.7v0.8h-1.4v4.3H642v-4.3h-1.4v-0.8H644.5z M649.3,15.8v-1.8 c0-1.4,0.1-2.1,0.1-2.6h0c-0.4,1.2-0.9,3.1-1.3,4.4h-0.9c-0.4-1.5-0.9-3.1-1.2-4.4h0c0,0.4,0.1,1.4,0.1,3.2v1.1H645v-5.1h1.6 c0.4,1.3,0.9,2.9,1,3.7h0c0.3-1,0.7-2.5,1.1-3.7h1.6v5.1H649.3z" />
+                <polygon clip-path="url(#SVGID_2_)" fill="#FFFFFF" points="597.6,64.3 573.1,10.7 567.5,10.7 543,64.3 549.2,64.3 570.2,17.7 591,64.3 	" />
+            </g>
+        </svg>
+
+    </a>
+
+    <div id="gameOverlay">
+        <div id="gameInfo">
+            <div id="gameInfoRight"></div>
+            <div id="gameInfoLeft"></div>
+        </div>
+    </div>
+
+    <div id="tutorialOverlay">
+        <div id="tutorial">
+        </div>
+    </div>
+
+    <div id="loginOverlay">
+        <div id="loginBox">
+            <input id="login" autocomplete="off" placeholder="Enter your Name..." type="text" value="" maxlength="20" spellcheck="false"
+            />
+            <input type="button" value="JOIN" onclick="Shooter.doLogin()" />
+
+            <br/>
+
+            <div id="colors"></div>
         </div>
 
-        <div id="tutorialOverlay">
-            <div id="tutorial">
-            </div>
+        <div id="offlineBox">
+            <div id="serverStatus">SERVER OFFLINE</div>
         </div>
+    </div>
 
-        <div id="loginOverlay">
-            <div id="loginBox">
-                <input id="login" autocomplete="off" placeholder="Enter your Name..." type="text" value="" maxlength="20" spellcheck="false" />
-                <input type="button" value="JOIN" onclick="Shooter.doLogin()"/>
+    <div id="gameController" class="clearfix">
+        <span>FIRE!</span>
+    </div>
 
-                <br/>
+    <canvas id="bg"></canvas>
 
-                <div id="colors"></div>
-            </div>
+    <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script src="js/hammer.min.js"></script>
+    <script src="js/jquery.hammer.js"></script>
 
-            <div id="offlineBox">
-                <div id="serverStatus">SERVER OFFLINE</div>
-            </div>
-        </div>
+    <script type="text/javascript" src="main.js"></script>
 
-        <div id="gameController" class="clearfix">
-            <span>FIRE!</span>
-        </div>
+    <script type="text/javascript" src="bison.js"></script>
+    <script type="text/javascript" src="nodegame.client.js"></script>
+    <script type="text/javascript" src="config.js"></script>
+    <script type="text/javascript" src="sound.js"></script>
 
-        <canvas id="bg"></canvas>
+    <script type="text/javascript" src="game.js"></script>
+    <script type="text/javascript" src="game.events.js"></script>
+    <script type="text/javascript" src="game.draw.js"></script>
+    <script type="text/javascript" src="game.helpers.js"></script>
+    <script type="text/javascript" src="actors.js"></script>
+</body>
 
-        <script src="//code.jquery.com/jquery-1.11.3.min.js"></script>
-        <script src="js/hammer.min.js"></script>
-        <script src="js/jquery.hammer.js"></script>
-
-        <script type="text/javascript" src="main.js"></script>
-
-        <script type="text/javascript">
-            WEB_SOCKET_SWF_LOCATION = 'flash/WebSocketMain.swf';
-        </script>
-
-        <script type="text/javascript" src="flash/swfobject.js"></script>
-        <script type="text/javascript" src="flash/FABridge.js"></script>
-        <script type="text/javascript" src="flash/web_socket.js"></script>
-
-        <script type="text/javascript" src="bison.js"></script>
-        <script type="text/javascript" src="nodegame.client.js"></script>
-        <script type="text/javascript" src="config.js"></script>
-        <script type="text/javascript" src="sound.js"></script>
-
-        <script type="text/javascript" src="game.js"></script>
-        <script type="text/javascript" src="game.events.js"></script>
-        <script type="text/javascript" src="game.draw.js"></script>
-        <script type="text/javascript" src="game.helpers.js"></script>
-        <script type="text/javascript" src="actors.js"></script>
-    </body>
 </html>
-
