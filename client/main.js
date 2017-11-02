@@ -130,14 +130,14 @@
 
 
 (function () {
-    $(window).load(function() {
-        $('#login').on('keyup', function (e) {
-            console.log(e.keyCode)
-            if (e.keyCode == 13) {
-                Shooter.doLogin();
-            }
-        });
+    $('#login').on('keyup', function (e) {
+        console.log(e.keyCode)
+        if (e.keyCode == 13) {
+            Shooter.doLogin();
+        }
+    });
 
+    $(window).load(function() {
         initGame();
     });
 }());
