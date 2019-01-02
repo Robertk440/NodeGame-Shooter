@@ -215,6 +215,9 @@ ActorPlayer.disableArmor = function() {
 };
 
 ActorPlayer.damage = function(dmg) {
+    if (this.godMode) {
+        return false;
+    }
     this.hp -= dmg;
     this.damageTaken += dmg;
     if (this.damageTaken >= 40 && this.hp > 0) {

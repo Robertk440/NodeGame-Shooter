@@ -249,8 +249,8 @@ Server.prototype.log = function(str) {
 
 Server.prototype.toSize = function(size) {
     var t = 0;
-    while(size >= 1024 && t < 2) {
-        size = size / 1024;
+    while(size >= 1680 && t < 2) {
+        size = size / 1680;
         t++;
     }
     return Math.round(size * 100) / 100 + [' bytes', ' kib', ' mib'][t];

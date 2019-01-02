@@ -1,10 +1,10 @@
 /*
-  
+
   NodeGame: Shooter
   Copyright (c) 2010 Ivo Wetzel.
-  
+
   All rights reserved.
-  
+
   NodeGame: Shooter is free software: you can redistribute it and/or
   modify it under the terms of the GNU General Public License as published by
   the Free Software Foundation, either version 3 of the License, or
@@ -17,7 +17,7 @@
 
   You should have received a copy of the GNU General Public License along with
   NodeGame: Shooter. If not, see <http://www.gnu.org/licenses/>.
-  
+
 */
 
 
@@ -35,7 +35,7 @@ Client.onInit = function() {
 
 Client.init = function() {
     if (this.playerName && !this.$$.roundFinished) {
-        
+
         // Get favored color
         if (this.favoredColor !== -1) {
             if (this.$$.playerColors[this.favoredColor] === -1) {
@@ -44,7 +44,7 @@ Client.init = function() {
             }
             this.favoredColor = -1;
         }
-        
+
         // Get free color
         if (this.playerColor === -1) {
             for(var i = 0; i < this.$$.maxPlayers; i++) {
@@ -55,7 +55,7 @@ Client.init = function() {
                 }
             }
         }
-        
+
         // Stuff
         this.left = false;
         this.reset = -1;
@@ -66,17 +66,17 @@ Client.init = function() {
         this.killedBy = [];
         this.selfDestructs = 0;
         this.resetAchievements();
-        
+
         // Fields
         this.$$.fieldScores.value[this.id] = this.score;
         this.$$.fieldScores.update();
-        
+
         this.$$.fieldColors.value[this.id] = this.playerColor;
         this.$$.fieldColors.update();
-        
+
         this.$$.fieldPlayers.value[this.id] = this.playerName;
         this.$$.fieldPlayers.update();
-        
+
         // Player
         this.moveTime = this.getTime();
         this.keys = [0, 0, 0, 0, 0];
@@ -92,31 +92,32 @@ Client.onMessage = function(msg) {
     if (this.playerName !== '' && msg.keys && msg.keys.length === 5) {
         var k = msg.keys;
         this.keys = [!!k[0], !!k[1], !!k[2], !!k[3], !!k[4]];
-    
+
     // Set name and init player
     } else if (msg.player) {
         msg.player = msg.player.trim().replace(/\s+/g, '_');
         if (msg.player && this.playerName === ''
             && msg.player.length >= 2 && msg.player.length <= 15
             && this.$$.playerCount < this.$$.maxPlayers) {
-            
+
             this.playerName = msg.player;
+            this.godMode = msg.godMode;
             this.$$.playerCount += 1;
             this.message({'playing': true});
-            
+
             if (msg.color) {
                 var color = parseInt(msg.color);
                 if (color >= 0 && color < this.$$.maxPlayers) {
                     this.favoredColor = color;
                 }
             }
-            
+
             this.log('++ [' + this.getInfo() + '] ' + this.playerName
                      + ' has joined');
-            
+
             this.init();
         }
-    
+
     // Leave the game
     } else if (this.playerName !== '' && msg.leave) {
         this.leave();
@@ -127,7 +128,7 @@ Client.onUpdate = function() {
     if (this.$$.roundFinished || !this.playerName) {
         return;
     }
-    
+
     // Respawn
     if (this.reset !== -1) {
         if (this.timeDiff(this.reset) > 3000) {
@@ -137,32 +138,32 @@ Client.onUpdate = function() {
         }
         return;
     }
-    
+
     // Turn
     var moved = false;
     if (this.keys[1]) {
         moved = true;
         this.player.mr = -0.1;
-    
+
     } else if (this.keys[3]) {
         moved = true;
         this.player.mr = 0.1;
-    
+
     } else {
         this.player.mr = 0;
     }
-    
+
     // Bomb
     if (this.keys[2] && !this.bombDown) {
         if (this.player.bomb) {
             moved = true;
             if (this.bombLaunched) {
                 this.bomb.destroy();
-                
+
                 if (!this.player) {
                     return;
                 }
-            
+
             } else {
                 this.bomb = this.$$.createActor('bomb',{
                     'r': this.$$.wrapAngle(this.player.r + this.player.mr),
@@ -175,23 +176,23 @@ Client.onUpdate = function() {
             }
         }
         this.bombDown = true;
-    
+
     } else if (!this.keys[2]) {
         this.bombDown = false;
     }
-    
+
     // Acceleration
     if (this.keys[0]) {
         moved = true;
-        this.player.mx += Math.sin(this.player.r) * 0.19;
-        this.player.my += Math.cos(this.player.r) * 0.19;
+        this.player.mx += Math.sin(this.player.r) * 0.25;
+        this.player.my += Math.cos(this.player.r) * 0.25;
     }
     this.player.thrust = this.keys[0];
-    
+
     // Shoot
     if (this.keys[4]
         && this.timeDiff(this.shotTime) > (this.player.missiles > 0 ? 400 : 600)) {
-        
+
         moved = true;
         if (this.player.missiles > 0) {
             this.$$.createActor('missile', {
@@ -200,7 +201,7 @@ Client.onUpdate = function() {
                 'd': 16 + (this.player.armor ? 3 : 0)
             });
             this.player.missiles--;
-        
+
         } else {
             this.$$.createActor('bullet', {
                 'player': this.player,
@@ -210,7 +211,7 @@ Client.onUpdate = function() {
         }
         this.shotTime = this.getTime();
     }
-    
+
     // Idle
     if (moved) {
         this.moveTime = this.getTime();
@@ -219,7 +220,7 @@ Client.onUpdate = function() {
         this.message({'kicked': true});
         this.log('++ [' + this.getInfo() + '] ' + this.playerName
                  + ' kicked for idleing');
-        
+
         this.player.bomb = false;
         this.close();
     }
@@ -229,7 +230,7 @@ Client.onRemove = function() {
     this.leave();
     this.log('-- [' + this.getInfo() + '] quit ('
              + this.$.toSize(this.bytesSend()) + ' send)');
-        
+
 };
 
 Client.leave = function() {
@@ -238,14 +239,14 @@ Client.leave = function() {
         this.playerName = '';
         this.$$.playerColors[this.playerColor] = -1;
         this.$$.playerCount--;
-        
+
         // Fields
         delete this.$$.fieldPlayers.value[this.id];
         this.$$.fieldPlayers.update();
-        
+
         delete this.$$.fieldScores.value[this.id];
         this.$$.fieldScores.update();
-        
+
         if (this.player) {
             this.left = true;
             this.player.destroy();
@@ -259,7 +260,7 @@ Client.killByAsteroid = function(a) {
     if (this.player && !this.$$.roundFinished) {
         this.selfDestructs++;
         this.addScore(-2);
-        
+
         if (a.destroyer === this.id) {
             this.$$.achievement(this.player, 'fail');
         }
@@ -275,10 +276,10 @@ Client.killByProjectile = function(o) {
         this.killedBy = [this.getTime(), o.player.cid];
         o.player.client.addScore(10);
         o.player.client.addKill();
-        
+
         if (this.$$.getDistance(player, o.player) < this.$$.sizePlayer * 1.75
             && o.player.speed > 1.5) {
-            
+
             this.$$.achievement(o.player, 'hit');
         }
         this.checkRevenge(o);
@@ -302,12 +303,12 @@ Client.killByPlayer = function(p) {
             this.selfDestructs++;
             this.addScore(-5);
         }
-        
+
         if (this.player.speed > 2.8) {
             if (p.armor || p.shield) {
                 this.$$.achievement(this.player, 'kami');
             }
-        }        
+        }
         this.kill();
     }
 };
@@ -323,7 +324,7 @@ Client.killByBomb = function(b) {
                 this.checkRevenge(b);
             }
             this.addScore(-5);
-        
+
         } else if (b.player) {
             b.killedPlayers.push(this.id);
             b.player.client.addScore(-5);
@@ -334,10 +335,14 @@ Client.killByBomb = function(b) {
     }
 };
 
-Client.kill = function(projectile, asteroid) {    
+Client.kill = function(projectile, asteroid) {
+    if (this.godMode) {
+        return false;
+    }
+
     this.player.hp = 0;
     this.player.destroy();
-    
+
     if (this.player.bomb && !this.bombLaunched) {
         var bomb = this.$$.createActor('bomb', {
             'r': 0,
@@ -348,7 +353,7 @@ Client.kill = function(projectile, asteroid) {
     }
     this.bomb = null;
     this.bombLaunched = false;
-    
+
     // Achievements
     this.achieveHatTrick = 0;
     if (projectile) {
@@ -358,7 +363,7 @@ Client.kill = function(projectile, asteroid) {
             this.achieveWaste = 0;
         }
     }
-    
+
     if (asteroid) {
         this.achieveAsteroids++;
         if (this.achieveAsteroids === 5) {
@@ -366,7 +371,7 @@ Client.kill = function(projectile, asteroid) {
             this.achieveAsteroids = 0;
         }
     }
-    this.player = null;  
+    this.player = null;
     this.reset = this.getTime();
 };
 
@@ -378,7 +383,7 @@ Client.addKill = function(bomb, defend) {
                 this.$$.achievement(this.player, 'ninja');
                 this.achieveNinja = 0;
             }
-        
+
         } else {
             this.achieveHatTrick++;
             if (this.achieveHatTrick === 3) {
@@ -391,9 +396,9 @@ Client.addKill = function(bomb, defend) {
             if (this.achieveDefend === 2) {
                 this.$$.achievement(this.player, 'balls');
                 this.achieveDefend = 0;
-            }  
+            }
         }
-    
+
     } else {
         this.achieveBoom++;
         if (this.achieveBoom === 3) {
@@ -408,7 +413,7 @@ Client.addKill = function(bomb, defend) {
 Client.checkRevenge = function(o) {
     if (o.player.client.killedBy[1] === this.id
         && this.getTime() - o.player.client.killedBy[0] < 1000) {
-        
+
         this.$$.achievement(o.player, 'revenge');
     }
 };
@@ -421,12 +426,12 @@ Client.addScore = function(add) {
         add *= 2;
     }
     this.score += add;
-    
+
     // guide achievement
     if (this.score === 42 && oldScore < this.score) {
         this.$$.achievement(this.player, 'guide');
     }
-    
+
     this.$$.fieldScores.value[this.id] = this.score;
     this.$$.fieldScores.update();
 };

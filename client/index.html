@@ -76,7 +76,14 @@
 
     <div id="loginOverlay">
         <div id="loginBox">
-            <input id="login" autocomplete="off" placeholder="Enter your Name..." type="text" value="" maxlength="20" spellcheck="false"
+            <input id="login"
+                autocomplete="off"
+                placeholder="Enter your Name..."
+                type="text"
+                value=""
+                maxlength="20"
+                spellcheck="false"
+                onkeydown="Shooter.onLogin()"
             />
             <input type="button" value="JOIN" onclick="Shooter.doLogin()" />
 

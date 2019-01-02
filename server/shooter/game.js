@@ -27,8 +27,8 @@ var Game = Shooter.Game();
 Game.onInit = function() {
 
     // Size
-    this.width = 1024;//etc.ww;
-    this.height = 768;//etc.wh;
+    this.width = 1680;//etc.ww;
+    this.height = 850;//etc.wh;
     this.fieldSize = this.createField('s', [this.width, this.height]);
 
     this.fullWidth = this.width + 32;
@@ -38,7 +38,7 @@ Game.onInit = function() {
 
     // Rounds
     this.roundGame = 300000;
-    this.roundWait = 30000;
+    this.roundWait = 45000;
 
     this.roundID = 0;
     this.roundStart = 0;
@@ -52,9 +52,16 @@ Game.onInit = function() {
     this.fieldRoundStats = this.createField('rs', []);
 
     // Players
-    this.maxPlayers = 20;
+    this.maxPlayers = 30;
     this.playerCount = 0;
-    this.playerColors = [-1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1, -1];
+    this.playerColors = [
+                            -1, -1, -1, -1, -1,
+                            -1, -1, -1, -1, -1,
+                            -1, -1, -1, -1, -1,
+                            -1, -1, -1, -1, -1,
+                            -1, -1, -1, -1, -1,
+                            -1, -1, -1, -1, -1,
+                        ];
 
     this.fieldMaxPlayers = this.createField('m', this.maxPlayers);
     this.fieldPlayers = this.createField('p', {});
@@ -69,25 +76,41 @@ Game.onInit = function() {
     this.sizeMissile = 4;
     this.sizeDefend = 3;
     this.sizeBomb = 4;
-    this.sizeAsteroid = 24;
-    this.sizeBigAsteroid = 150;
+    this.sizeAsteroid = 50;
+    this.sizeBigAsteroid = 200;
 
     // PowerUPS
     this.powerUps = {};
     this.powerUpCount = 0;
-    this.powerUpsMax = 3;
+    this.powerUpsMax = 5;
     this.addPowerUpType('shield',  2, 23, 10, true);
     this.addPowerUpType('armor',   1, 30, 20, true);
     this.addPowerUpType('missile', 2, 16, 15, true);
-    this.addPowerUpType('life',    2,  8,  8, false);
+    this.addPowerUpType('life',    2,  8,  8, true);
     this.addPowerUpType('boost',   1, 22, 12, true);
     this.addPowerUpType('defense', 2, 30, 30, true);
     this.addPowerUpType('bomb',    1, 65, 35, true);
     this.addPowerUpType('camu',    1, 40, 20, true);
-    this.powerUpTimes = [1.8, 1.25, 1.12, 1.0, 1, 0.9, 0.8];
+    // this.powerUpTimes = [1.8, 1.25, 1.12, 1.0, 1, 0.9, 0.8];
+    this.powerUpTimes = [
+                            0.5, 0.5, 0.5, 0.5, 0.5,
+                            0.5, 0.5, 0.5, 0.5, 0.5,
+                            0.5, 0.5, 0.5, 0.5, 0.5,
+                            0.5, 0.5, 0.5, 0.5, 0.5,
+                            0.5, 0.5, 0.5, 0.5, 0.5,
+                            0.5, 0.5, 0.5, 0.5, 0.5
+                        ];
 
     // Asteroids
-    this.maxAsteroids = [19, 18, 17, 17, 16, 16, 15];
+    this.maxAsteroids = [
+                            100, 100, 100, 100, 100,
+                            100, 100, 100, 100, 100,
+                            100, 100, 100, 100, 100,
+                            100, 100, 100, 100, 100,
+                            100, 100, 100, 100, 100,
+                            100, 100, 100, 100, 100
+                        ];
+    // this.maxAsteroids = [19, 18, 17, 17, 16, 16, 15];
 
     // Start Game
     this.startRound();

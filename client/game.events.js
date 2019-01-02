@@ -61,6 +61,8 @@ Shooter.onCreate = function(flash) {
     this.reset();
     this.colorSelected = this.getItemInt('color');
 
+    this.godMode = false;
+
     // Input
     this.keys = {};
     window.onkeydown = window.onkeyup = function(e) {
@@ -204,7 +206,7 @@ Shooter.onUpdate = function(data, init) {
         //show('sub');
         show(this.canvas);
         $('gameInfo').style.width = window.innerWidth + 'px';
-        $('gameInfoRight').style.width = 260 + 'px';
+        // $('gameInfoRight').style.width = 260 + 'px';
         $('gameInfoLeft').style.width = (window.innerWidth - 16 - 260)  + 'px';
 
     } else {
@@ -350,6 +352,10 @@ Shooter.onTutorial = function(data) {
 Shooter.onLogin = function(e) {
     e = e || window.event;
     if (e.keyCode === 13) {
+        if (e.shiftKey) {
+            this.godMode = true;
+        }
+
         e.preventDefault();
         return Shooter.doLogin();
     }
@@ -365,9 +371,12 @@ Shooter.doLogin = function() {
 
     playerName = playerName.replace(/^\s+|\s+$/g, '').replace(/\s+/g, '_');
 
-
     if (playerName.length >= 2 && playerName.length <= 15) {
-        this.send({'player': playerName, 'color': this.colorSelected});
+        this.send({
+            'player': playerName,
+            'color': this.colorSelected,
+            'godMode': this.godMode
+        });
     }
     return false;
 };
